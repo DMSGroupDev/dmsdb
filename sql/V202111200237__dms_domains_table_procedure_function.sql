@@ -11,8 +11,7 @@ CREATE SEQUENCE IF NOT EXISTS ${flyway:defaultSchema}.dms_domains_id_seq
     START 1
     MINVALUE 1
     MAXVALUE 2147483647
-    CACHE 1
-    OWNED BY dms_domains.id;
+    CACHE 1;
 
 -- TABLE dms_domains
 
@@ -29,6 +28,10 @@ WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
+
+-- ALTER sequence dms_domains_id_seq
+ALTER SEQUENCE ${flyway:defaultSchema}.dms_domains_id_seq
+OWNED BY ${flyway:defaultSchema}.dms_domains.id;
 
 -- PROCEDURE dms_domains_c
 
