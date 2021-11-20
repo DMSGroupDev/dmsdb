@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v2
     
       - name: Download na copy Flyway
-        run: wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.2/flyway-commandline-8.0.2-linux-x64.tar.gz | tar xz && sudo ln -s `pwd`/flyway-8.0.2/flyway /usr/local/bin 
+        run: wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.5/flyway-commandline-8.0.5-linux-x64.tar.gz | tar xz && sudo ln -s `pwd`/flyway-8.0.5/flyway /usr/local/bin 
       
       - name: Flyway validate 
         run: flyway -url="jdbc:postgresql://${{ secrets.SERVER }}:5432/${{ secrets.DATABASE }}" -user="${{ secrets.USERNAME }}" -password="${{ secrets.PASSWORD }}" -defaultSchema="${{ secrets.FLYWAY_DEFAULT_SCHEMA }}" -schemas="${{ secrets.FLYWAY_DEFAULT_SCHEMA }}" migrate 
@@ -68,7 +68,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Download na copy Flyway
-        run: wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.2/flyway-commandline-8.0.2-linux-x64.tar.gz | tar xz && sudo ln -s `pwd`/flyway-8.0.2/flyway /usr/local/bin 
+        run: wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.5/flyway-commandline-8.0.5-linux-x64.tar.gz | tar xz && sudo ln -s `pwd`/flyway-8.0.5/flyway /usr/local/bin 
       
       - name: Flyway validate 
         run: flyway -url="jdbc:postgresql://${{ secrets.SERVER }}:5432/${{ secrets.DATABASE }}" -user="${{ secrets.USERNAME }}" -password="${{ secrets.PASSWORD }}" -defaultSchema="${{ secrets.FLYWAY_DEFAULT_SCHEMA }}" -schemas="${{ secrets.FLYWAY_DEFAULT_SCHEMA }}" migrate 
