@@ -4,6 +4,16 @@ BEGIN;
 -- Schema 
 CREATE SCHEMA IF NOT EXISTS ${flyway:defaultSchema};
 
+-- SEQUENCE dms_domains_id_seq
+
+CREATE SEQUENCE IF NOT EXISTS ${flyway:defaultSchema}.dms_domains_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1
+    OWNED BY dms_domains.id;
+
 -- TABLE dms_domains
 
 CREATE TABLE IF NOT EXISTS ${flyway:defaultSchema}.dms_domains
