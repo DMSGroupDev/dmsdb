@@ -8,7 +8,7 @@ CREATE SCHEMA IF NOT EXISTS ${flyway:defaultSchema};
 
 CREATE TABLE IF NOT EXISTS ${flyway:defaultSchema}.dms_domains
 (
-    id integer NOT NULL DEFAULT nextval('pokus.dms_domains_id_seq'::regclass),
+    id integer NOT NULL DEFAULT nextval('${flyway:defaultSchema}.dms_domains_id_seq'::regclass),
     domain_name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     admin_id integer NOT NULL,
     active boolean NOT NULL DEFAULT true,
@@ -31,7 +31,7 @@ AS $BODY$
 DECLARE
   v_exists INTEGER;
 BEGIN
-  SELECT count(domain_name) INTO v_exists FROM pokus.dms_domains WHERE domain_name = LOWER(i_domain_name);
+  SELECT count(domain_name) INTO v_exists FROM ${flyway:defaultSchema}.dms_domains WHERE domain_name = LOWER(i_domain_name);
   IF v_exists >= 1 THEN
     RAISE NOTICE 'Domain name must be uniq.';
     RETURN;
@@ -42,7 +42,7 @@ BEGIN
     RAISE NOTICE 'Administrator ID can not be empty.';
     RETURN;
   ELSE  
-    INSERT INTO pokus.dms_domains (domain_name, admin_id, active) VALUES (LOWER(i_domain_name),i_admin_id, i_active);
+    INSERT INTO ${flyway:defaultSchema}.dms_domains (domain_name, admin_id, active) VALUES (LOWER(i_domain_name),i_admin_id, i_active);
     RETURN;
   END IF;
 --EXCEPTION WHEN OTHERS THEN
@@ -60,7 +60,7 @@ CREATE OR REPLACE PROCEDURE ${flyway:defaultSchema}.dms_domains_u(
 LANGUAGE 'plpgsql'
 AS $BODY$
 DECLARE
-  v_sql text := 'UPDATE pokus.dms_domains SET';
+  v_sql text := 'UPDATE ${flyway:defaultSchema}.dms_domains SET';
   v_exists INTEGER;
   v_current_domain varchar(50);
   v_first_change boolean := true;
@@ -69,8 +69,8 @@ BEGIN
     RAISE WARNING 'It is necessary to provide data for the procedure';
     RETURN;
   END IF;
-  SELECT count(domain_name) INTO v_exists FROM pokus.dms_domains WHERE domain_name = LOWER(i_domain_name);
-  SELECT domain_name INTO v_current_domain FROM pokus.dms_domains WHERE id = i_domain_id;
+  SELECT count(domain_name) INTO v_exists FROM ${flyway:defaultSchema}.dms_domains WHERE domain_name = LOWER(i_domain_name);
+  SELECT domain_name INTO v_current_domain FROM ${flyway:defaultSchema}.dms_domains WHERE id = i_domain_id;
 
   IF i_domain_name IS NOT NULL AND v_exists = 0 AND v_current_domain <> lower(i_domain_name) THEN
     v_sql := v_sql || ' domain_name = LOWER($2)';
@@ -116,7 +116,7 @@ CREATE OR REPLACE PROCEDURE ${flyway:defaultSchema}.dms_domains_d(
 LANGUAGE 'plpgsql'
 AS $BODY$
 DECLARE
-  v_sql text := 'DELETE FROM pokus.dms_domains WHERE id = $1 and domain_name = $2';
+  v_sql text := 'DELETE FROM ${flyway:defaultSchema}.dms_domains WHERE id = $1 and domain_name = $2';
 BEGIN
   IF i_domain_id IS NOT NULL AND i_domain_name IS NOT NULL AND i_domain_id > 0 THEN
 	EXECUTE v_sql USING i_domain_id, LOWER(i_domain_name);
@@ -144,7 +144,7 @@ AS $BODY$
 BEGIN
 DECLARE
   v_conditions boolean := false;
-  v_sql text := 'SELECT id, domain_name, admin_id, active FROM pokus.dms_domains';
+  v_sql text := 'SELECT id, domain_name, admin_id, active FROM ${flyway:defaultSchema}.dms_domains';
 BEGIN
   IF i_domain_id > 0 THEN
     v_conditions := true;
