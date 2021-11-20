@@ -11,7 +11,9 @@ name: Database Migration Tests with Flyway
 
 on:
   push:
-    branches: [ devdeploy, testdeploy ]
+    branches: 
+      - 'devdeploy'
+      - 'testdeploy'
     paths:
       - 'sql/**'
   pull_request:
