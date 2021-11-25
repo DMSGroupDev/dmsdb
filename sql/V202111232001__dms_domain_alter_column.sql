@@ -5,6 +5,7 @@ BEGIN;
 
 -- Alter columns
 ALTER TABLE ${flyway:defaultSchema}.dms_domains ALTER COLUMN admin_id SET DATA TYPE uuid USING (uuid_generate_v4());
+ALTER TABLE ${flyway:defaultSchema}.dms_domains RENAME COLUMN admin_id TO admin_uuid;
 
 -- Transaction end
 END;
