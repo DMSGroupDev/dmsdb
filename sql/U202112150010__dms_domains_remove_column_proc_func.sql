@@ -2,7 +2,7 @@
 BEGIN;
 
 -- PROCEDURE dms_domains_c
-
+DROP PROCEDURE IF EXISTS ${flyway:defaultSchema}.dms_domains_c(character varying, boolean);
 CREATE OR REPLACE PROCEDURE ${flyway:defaultSchema}.dms_domains_c(
 	i_domain_name character varying DEFAULT NULL::character varying,
 	i_admin_id integer DEFAULT NULL::integer,
@@ -32,7 +32,7 @@ END;
 $BODY$;
 
 -- PROCEDURE dms_domains_u
-
+DROP PROCEDURE IF EXISTS ${flyway:defaultSchema}.dms_domains_u(integer, character varying, boolean);
 CREATE OR REPLACE PROCEDURE ${flyway:defaultSchema}.dms_domains_u(
 	i_domain_id integer,
 	i_domain_name character varying DEFAULT NULL::character varying,
@@ -90,7 +90,7 @@ $BODY$;
 
 
 -- PROCEDURE dms_domains_d
-
+DROP PROCEDURE IF EXISTS ${flyway:defaultSchema}.dms_domains_d(integer, character varying);
 CREATE OR REPLACE PROCEDURE ${flyway:defaultSchema}.dms_domains_d(
 	i_domain_id integer,
 	i_domain_name character varying)
@@ -109,7 +109,7 @@ END;
 $BODY$;
 
 -- FUNCTION dms_domains_r
-
+DROP FUNCTION IF EXISTS ${flyway:defaultSchema}.dms_domains_r(integer, character varying, boolean);
 CREATE OR REPLACE FUNCTION ${flyway:defaultSchema}.dms_domains_r(
 	i_domain_id integer DEFAULT NULL::integer,
 	i_domain_name character varying DEFAULT NULL::character varying,
