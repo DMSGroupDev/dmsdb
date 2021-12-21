@@ -8,4 +8,3 @@ ALTER TABLE ${flyway:defaultSchema}.dms_domains DROP COLUMN IF EXISTS admin_uuid
 
 -- Transaction end
 END;
-
