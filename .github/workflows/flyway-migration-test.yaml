@@ -34,4 +34,4 @@ jobs:
           engine: PostgreSQL (v11.0)
           migrationDirs: sql  
 env:
-  FLYWAY_HUB_ACCESS_TOKEN: ${{ secrets.FLYWAY_HUB_ACCESS_TOKEN }}
+  FLYWAYHUB_ACCESS_TOKEN: ${{ secrets.FLYWAY_HUB_ACCESS_TOKEN }}
